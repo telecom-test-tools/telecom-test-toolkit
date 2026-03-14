@@ -1,33 +1,40 @@
-# Python
+# ============================================
+# Telecom Test Toolkit — .gitignore
+# ============================================
+
+# ---------- Python ----------
 __pycache__/
 *.py[cod]
 *$py.class
 *.so
 .Python
-env/
-venv/
-.venv/
-.env/
-pip-log.txt
-pip-delete-this-directory.txt
 
-# Virtual environments
-.env
-.venv
+# ---------- Distribution / Packaging ----------
+dist/
+build/
+*.egg-info/
+*.egg
+*.whl
+sdist/
+wheels/
+pip-wheel-metadata/
+
+# ---------- Virtual Environments ----------
+.env/
+.venv/
 env/
 venv/
 ENV/
 
-# Jupyter Notebook
-.ipynb_checkpoints
-
-# IDEs
+# ---------- IDE / Editor ----------
 .vscode/
 .idea/
 *.swp
 *.swo
+*.sublime-project
+*.sublime-workspace
 
-# OS generated files
+# ---------- OS ----------
 .DS_Store
 .DS_Store?
 ._*
@@ -36,11 +43,7 @@ ENV/
 ehthumbs.db
 Thumbs.db
 
-# Logs
-*.log
-logs/
-
-# pytest/testing
+# ---------- Testing ----------
 .pytest_cache/
 .coverage
 htmlcov/
@@ -48,8 +51,21 @@ htmlcov/
 nosetests.xml
 coverage.xml
 
-# Streamlit/General Web
+# ---------- TTT Ecosystem ----------
+# Pipeline output (generated at runtime)
+ttt_output/
+ttt_data.json
+*.html
+
+# ---------- Logs ----------
+*.log
+logs/
+
+# ---------- Jupyter ----------
+.ipynb_checkpoints/
+
+# ---------- Streamlit ----------
 .streamlit/
+
+# ---------- Node (if dashboard uses npm) ----------
 node_modules/
-dist/
-build/
