@@ -8,13 +8,14 @@ Commands:
 """
 
 import os
+
 import click
 from rich.console import Console
 from rich.table import Table
 
 from ttt.models import PipelineContext
+from ttt.pipeline import print_pipeline_summary, run_pipeline, run_single_plugin
 from ttt.plugin import discover_plugins
-from ttt.pipeline import run_pipeline, run_single_plugin, print_pipeline_summary
 
 console = Console()
 
@@ -32,7 +33,9 @@ def list_plugins():
     plugins = discover_plugins()
 
     if not plugins:
-        console.print("[yellow]No plugins found. Install plugins or run 'pip install -e .'[/yellow]")
+        console.print(
+            "[yellow]No plugins found. Install plugins or run 'pip install -e .'[/yellow]"
+        )
         return
 
     table = Table(title="🧩 Discovered Plugins")
@@ -50,11 +53,15 @@ def list_plugins():
 @cli.command("run")
 @click.argument("plugin_name")
 @click.option("--input", "-i", "input_files", multiple=True, help="Input log file(s)")
-@click.option("--output", "-o", "output_dir", default="./ttt_output", help="Output directory")
+@click.option(
+    "--output", "-o", "output_dir", default="./ttt_output", help="Output directory"
+)
 def run_plugin(plugin_name, input_files, output_dir):
     """Run a single plugin by name."""
     if not input_files:
-        console.print("[red]Error: Please provide at least one input file with --input[/red]")
+        console.print(
+            "[red]Error: Please provide at least one input file with --input[/red]"
+        )
         return
 
     # Validate input files exist
@@ -73,10 +80,20 @@ def run_plugin(plugin_name, input_files, output_dir):
 
 
 @cli.command("pipeline")
-@click.option("--logs", "-l", "log_files", multiple=True, required=True, help="Input log file(s)")
-@click.option("--output", "-o", "output_dir", default="./ttt_output", help="Output directory")
+@click.option(
+    "--logs", "-l", "log_files", multiple=True, required=True, help="Input log file(s)"
+)
+@click.option(
+    "--output", "-o", "output_dir", default="./ttt_output", help="Output directory"
+)
 @click.option("--only", "only_plugins", multiple=True, help="Run only these plugins")
-@click.option("--skip", "skip_types", multiple=True, default=["dashboard"], help="Skip plugin types")
+@click.option(
+    "--skip",
+    "skip_types",
+    multiple=True,
+    default=["dashboard"],
+    help="Skip plugin types",
+)
 def pipeline(log_files, output_dir, only_plugins, skip_types):
     """Run the full analysis pipeline on log files."""
     # Validate input files
@@ -91,12 +108,16 @@ def pipeline(log_files, output_dir, only_plugins, skip_types):
     )
 
     plugin_names = list(only_plugins) if only_plugins else None
-    context = run_pipeline(context, plugin_names=plugin_names, skip_types=list(skip_types))
+    context = run_pipeline(
+        context, plugin_names=plugin_names, skip_types=list(skip_types)
+    )
     print_pipeline_summary(context)
 
 
 @cli.command("dashboard")
-@click.option("--data-dir", "-d", default="./ttt_output", help="Directory with pipeline results")
+@click.option(
+    "--data-dir", "-d", default="./ttt_output", help="Directory with pipeline results"
+)
 @click.option("--port", "-p", default=8501, help="Streamlit port")
 def dashboard(data_dir, port):
     """Launch the Test Monitor Dashboard."""
@@ -107,12 +128,13 @@ def dashboard(data_dir, port):
         import streamlit
     except ImportError:
         console.print("[red]Error: streamlit is not installed.[/red]")
-        console.print("[dim]Install with: pip install 'telecom-test-toolkit[dashboard]'[/dim]")
+        console.print(
+            "[dim]Install with: pip install 'telecom-test-toolkit[dashboard]'[/dim]"
+        )
         return
 
     dashboard_app = os.path.join(
-        os.path.dirname(os.path.dirname(__file__)),
-        "test-monitor-dashboard", "app.py"
+        os.path.dirname(os.path.dirname(__file__)), "test-monitor-dashboard", "app.py"
     )
 
     if not os.path.exists(dashboard_app):

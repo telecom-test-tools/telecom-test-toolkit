@@ -15,7 +15,6 @@ from typing import Optional
 
 from ttt.models import PipelineContext
 
-
 DATA_FILENAME = "ttt_data.json"
 
 
@@ -81,18 +80,14 @@ def append_to_store(output_dir: str, context: PipelineContext) -> str:
 
     if existing is not None:
         # Merge: add new results, avoiding duplicates by tool+timestamp
-        existing_keys = {
-            (r.tool_name, r.timestamp) for r in existing.results
-        }
+        existing_keys = {(r.tool_name, r.timestamp) for r in existing.results}
         for result in context.results:
             key = (result.tool_name, result.timestamp)
             if key not in existing_keys:
                 existing.results.append(result)
 
         # Update log files list
-        existing.log_files = list(
-            set(existing.log_files + context.log_files)
-        )
+        existing.log_files = list(set(existing.log_files + context.log_files))
         context = existing
 
     context.output_dir = output_dir

@@ -55,9 +55,7 @@ def run_pipeline(
         plugins_to_run = all_plugins
 
     # Group by type for ordered execution
-    grouped: Dict[str, List[Tuple[str, TTTPlugin]]] = {
-        t: [] for t in EXECUTION_ORDER
-    }
+    grouped: Dict[str, List[Tuple[str, TTTPlugin]]] = {t: [] for t in EXECUTION_ORDER}
     for name, plugin in plugins_to_run.items():
         ptype = plugin.plugin_type
         if ptype in skip_types:
@@ -164,8 +162,6 @@ def print_pipeline_summary(context: PipelineContext) -> None:
         summary_keys = ", ".join(
             f"{k}: {v}" for k, v in list(result.summary.items())[:3]
         )
-        table.add_row(
-            result.tool_name, result.plugin_type, test_count, summary_keys
-        )
+        table.add_row(result.tool_name, result.plugin_type, test_count, summary_keys)
 
     console.print(table)

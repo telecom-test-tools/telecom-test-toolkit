@@ -24,6 +24,7 @@ classifiers = [
 dependencies = [
     "click>=8.0",
     "rich>=13.0",
+    "pydantic>=2.0",
 ]
 
 [project.optional-dependencies]
@@ -47,12 +48,21 @@ reporting = [
 ttt = "ttt.cli:cli"
 
 [project.entry-points."ttt.plugins"]
-testwatch = "ttt.plugins.testwatch_plugin:TestWatchPlugin"
-log-analyzer = "ttt.plugins.log_analyzer_plugin:LogAnalyzerPlugin"
-testscope = "ttt.plugins.testscope_plugin:TestScopePlugin"
-flakiness-scorer = "ttt.plugins.flakiness_plugin:FlakinessPlugin"
-report-generator = "ttt.plugins.report_gen_plugin:ReportGenPlugin"
-dashboard = "ttt.plugins.dashboard_plugin:DashboardPlugin"
+# Plugins are now dynamically installed by other repositories via this entry group
 
 [tool.setuptools.packages.find]
 include = ["ttt*"]
+
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+ignore_missing_imports = true
