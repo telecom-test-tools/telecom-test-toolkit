@@ -125,7 +125,6 @@ def dashboard(data_dir, port):
 
     # Check if streamlit is available
     try:
-        import streamlit
     except ImportError:
         console.print("[red]Error: streamlit is not installed.[/red]")
         console.print(

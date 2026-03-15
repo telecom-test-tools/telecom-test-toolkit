@@ -1,4 +1,3 @@
-import pytest
 
 from ttt.models import AnalysisResult, PipelineContext, TestResult
 
