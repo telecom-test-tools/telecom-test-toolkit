@@ -1,40 +1,66 @@
-# ============================================
-# Telecom Test Toolkit — .gitignore
-# ============================================
-
-# ---------- Python ----------
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# C extensions
 *.so
+
+# Distribution / packaging
 .Python
-
-# ---------- Distribution / Packaging ----------
-dist/
 build/
-*.egg-info/
-*.egg
-*.whl
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
 sdist/
+var/
 wheels/
-pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# ---------- Virtual Environments ----------
-.env/
-.venv/
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Environments
+.env
+.venv
 env/
 venv/
 ENV/
+env.bak/
+venv.bak/
 
-# ---------- IDE / Editor ----------
+# IDEs and Editors
 .vscode/
 .idea/
 *.swp
 *.swo
-*.sublime-project
-*.sublime-workspace
 
-# ---------- OS ----------
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
@@ -43,29 +69,15 @@ ENV/
 ehthumbs.db
 Thumbs.db
 
-# ---------- Testing ----------
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-nosetests.xml
-coverage.xml
+# Logs and databases
+*.log
+*.sqlite
+logs/
 
-# ---------- TTT Ecosystem ----------
-# Pipeline output (generated at runtime)
+# Telecom Test Toolkit Ecosystem (Project Specific)
 ttt_output/
 ttt_data.json
 *.html
 
-# ---------- Logs ----------
-*.log
-logs/
-
-# ---------- Jupyter ----------
-.ipynb_checkpoints/
-
-# ---------- Streamlit ----------
-.streamlit/
-
-# ---------- Node (if dashboard uses npm) ----------
+# Node (if dashboard uses npm)
 node_modules/
